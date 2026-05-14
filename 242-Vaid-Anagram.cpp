@@ -8,13 +8,15 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         unordered_map<char, int> charMap1, charMap2;
+        if (s.size()!= t.size() ) return false;
+        
         for (size_t i = 0; i < s.size(); i++) {
             charMap1[s[i]]++;
              
     
         }
         for (size_t i = 0; i < s.size(); i++) {
-            charMap2[s[i]]++;
+            charMap2[t[i]]++;
              
     
         }

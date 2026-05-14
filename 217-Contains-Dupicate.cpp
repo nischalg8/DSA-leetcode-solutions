@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 using namespace std;
 
 /* My approach (solution that I though of )
 class Solution {
 public:
-    bool constainsDuplicate(vector<int>& nums) {
+    bool containsDuplicate(vector<int>& nums) {
         unordered_map<int, int> numMap;
         for (size_t i = 0; i < nums.size(); i++) {
             numMap[nums[i]]++;
@@ -14,8 +15,7 @@ public:
                 return true;
                 
             }
-            numMap[nums[i]]++;
-    
+            
         }
         
         return false;
@@ -44,7 +44,7 @@ class Solution {
 
 int main() {
     Solution sol;
-    vector<int> nums = {2,7, 7, 11,7,15};
+    vector<int> nums = {2,7,  11,15};
   
 
     bool result = sol.containsDuplicate(nums);
