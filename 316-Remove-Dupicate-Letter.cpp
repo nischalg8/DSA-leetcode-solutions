@@ -15,27 +15,26 @@ public:
         unordered_map<char, size_t> lastIndex;
         unordered_map<char, bool> seenMap;
         string result;
-        for (size_t i=0; i<s.length(); i++)
+        for (size_t i = 0; i < s.length(); i++)
         {
-            lastIndex[s[i]]=i;
-
+            lastIndex[s[i]] = i;
         }
 
-        for (size_t i=0; i<s.length(); i++)
+        for (size_t i = 0; i < s.length(); i++)
 
         {
-            if(seenMap[s[i]]) continue;
-        
-            while (!st.empty() && st.top() > s[i] && i< lastIndex[st.top()] )
+            if (seenMap[s[i]])
+                continue;
+
+            while (!st.empty() && st.top() > s[i] && i < lastIndex[st.top()])
             {
                 seenMap[st.top()] = false;
                 st.pop();
             }
-          
-                st.push(s[i]);
 
-                seenMap[s[i]] = true;
-            
+            st.push(s[i]);
+
+            seenMap[s[i]] = true;
         }
         while (!st.empty())
         {
@@ -54,7 +53,7 @@ int main()
 
     Solution sol;
 
-    cout<<sol.removeDuplicateLetters("abacb")<<endl;
+    cout << sol.removeDuplicateLetters("abacb") << endl;
     //  1. basic example
 
     cout << sol.removeDuplicateLetters("bcabc") << endl;
