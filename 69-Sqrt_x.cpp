@@ -41,7 +41,37 @@ public:
         return largestRoot;
     }
 };
+class Solution1
+{
+public:
+    int mySqrt(int x)
+    {
 
+        if (x < 2) return x;
+        int start = 1, end = x / 2;
+        int mid = start + (end - start) / 2, largestRoot = 0;
+        long square ;
+        while (start <= end)
+        {
+            mid = start + (end - start) / 2;
+            square = 1L * mid * mid;
+         
+            if (square == x)
+            {
+               return mid;
+            }
+            else if(square < x){
+                start = mid+1;
+                largestRoot= mid;
+            }
+            else{
+                end = mid-1;
+            }
+          
+        }
+        return largestRoot;
+    }
+};
 int main()
 
 {
@@ -74,4 +104,29 @@ cout << sol.mySqrt(1000000) << endl;     // 1000
 cout << sol.mySqrt(99999999) << endl;    // 9999
 cout << sol.mySqrt(123456789) << endl;   // 11111
 cout << sol.mySqrt(1000000000) << endl;  // 31622
+
+Solution1 sol1;
+cout << sol1.mySqrt(25) << endl;          // 5
+cout << sol1.mySqrt(36) << endl;          // 6
+cout << sol1.mySqrt(49) << endl;          // 7
+cout << sol1.mySqrt(64) << endl;          // 8
+cout << sol1.mySqrt(81) << endl;          // 9
+
+cout << sol1.mySqrt(2) << endl;           // 1
+cout << sol1.mySqrt(3) << endl;           // 1
+cout << sol1.mySqrt(5) << endl;           // 2
+cout << sol1.mySqrt(8) << endl;           // 2
+cout << sol1.mySqrt(10) << endl;          // 3
+cout << sol1.mySqrt(15) << endl;          // 3
+cout << sol1.mySqrt(24) << endl;          // 4
+cout << sol1.mySqrt(27) << endl;          // 5
+cout << sol1.mySqrt(50) << endl;          // 7
+cout << sol1.mySqrt(99) << endl;          // 9
+
+cout << sol1.mySqrt(2147395599) << endl;  // 46339
+cout << sol1.mySqrt(2147483647) << endl;  // 46340
+cout << sol1.mySqrt(1000000) << endl;     // 1000
+cout << sol1.mySqrt(99999999) << endl;    // 9999
+cout << sol1.mySqrt(123456789) << endl;   // 11111
+cout << sol1.mySqrt(1000000000) << endl;  // 31622
 }

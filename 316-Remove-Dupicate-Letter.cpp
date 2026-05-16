@@ -5,53 +5,107 @@
 #include <unordered_map>
 
 using namespace std;
-
-class Solution
+// Solution I came up with..
+class Solution1
 {
 public:
     string removeDuplicateLetters(string s)
     {
         stack<char> st;
-        unordered_map<char, size_t> lastIndex;
-        unordered_map<char, bool> seenMap;
+
+        // frequency of remaining characters
+        int freq[26] = {0};
+
+        // tracks if character already exists in stack
+        bool inStack[26] = {false};
+
         string result;
-        for (size_t i = 0; i < s.length(); i++)
+
+        // count frequency
+        for(char c : s)
         {
-            lastIndex[s[i]] = i;
+            freq[c - 'a']++;
         }
 
-        for (size_t i = 0; i < s.length(); i++)
-
+        for(char c : s)
         {
-            if (seenMap[s[i]])
+            // current character processed,
+            // so decrease remaining frequency
+            freq[c - 'a']--;
+
+            // if already inside stack skip it
+            if(inStack[c - 'a'])
                 continue;
 
-            while (!st.empty() && st.top() > s[i] && i < lastIndex[st.top()])
+            // maintain lexicographically smallest order
+            while(!st.empty() &&
+                  st.top() > c &&
+                  freq[st.top() - 'a'] > 0)
             {
-                seenMap[st.top()] = false;
+                inStack[st.top() - 'a'] = false;
                 st.pop();
             }
 
-            st.push(s[i]);
-
-            seenMap[s[i]] = true;
+            st.push(c);
+            inStack[c - 'a'] = true;
         }
-        while (!st.empty())
+
+        // build answer
+        while(!st.empty())
         {
-            result = st.top() + result;
+            result= st.top()+result;
             st.pop();
         }
+
+
         return result;
     }
 };
+// another solution with lastIndex instead of freqMap
+class Solution1
+{
+public:
+    string removeDuplicateLetters(string s)
+    {
+      stack<char> st;
+      unsigned short int lastIndex[26] = {0};
+      bool inStack[26]={false};
+      string result;
+      for(int i=0; i<s.length(); i++)
+      {
+        lastIndex[s[i]-'a']= i;
+      }
 
+      for(int i=0 ; i< s.length(); i++)
+      {
+        if(inStack[s[i] - 'a']) continue; // if the alphabet is in stack then skip it 
+
+        while(!st.empty() && st.top() > s[i] && i < lastIndex[st.top()-'a'])
+        {
+            inStack[st.top() - 'a'] = false;
+            st.pop();
+        }
+
+        st.push(s[i]);
+         inStack[st.top() - 'a'] = true;
+
+      }
+      while(!st.empty())
+      {
+        result = st.top() + result;
+        st.pop();
+      }
+      return result;
+
+    }
+};
 #include <iostream>
 using namespace std;
 
 int main()
 {
 
-    Solution sol;
+    Solution1 sol;
 
     cout << sol.removeDuplicateLetters("abacb") << endl;
     //  1. basic example
