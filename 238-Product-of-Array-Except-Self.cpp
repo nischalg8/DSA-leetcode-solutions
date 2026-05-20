@@ -118,7 +118,7 @@ public:
         int prefProduct = 1;
         for (int i = 0; i < n; i++)
         {
-            result[i] *= prefProduct;
+            result[i] = prefProduct;
             prefProduct *= nums[i];
         }
 
