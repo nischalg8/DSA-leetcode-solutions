@@ -111,7 +111,7 @@ public:
 };
 int main()
 {
-
+    
     SolutionBruteForce sol1;
     SolutionBySorting sol2;
     SolutionHashTable sol3;
