@@ -3,31 +3,26 @@
 #include <unordered_set>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    int lengthOfLongestSubstring(const string &s)
-    {
-        size_t left = 0; 
-        int maxLen = 0;
-        unordered_set<char> seen;
-
-        for (size_t right = 0; right < s.length(); right++)
-        { 
-            while (seen.find(s[right]) != seen.end())
+    int lengthOfLongestSubstring(string s) {
+        size_t left=0;
+        unordered_set<int> st;
+        int maxlen=0;
+        for(size_t right{}; right< s.length(); ++right)
+        {   
+            while(st.find(s[right]) != st.end())
             {
-                seen.erase(s[left]);
+                st.erase(s[left]);
                 left++;
             }
-            seen.insert(s[right]);
-            maxLen = max(maxLen, static_cast<int>(right - left + 1));
             
+            st.insert(s[right]);
+            maxlen = max(maxlen, static_cast<int>(right-left)+1);
         }
-
-        return maxLen;
+        return maxlen;
     }
 };
-
 int main()
 {
     Solution sol;

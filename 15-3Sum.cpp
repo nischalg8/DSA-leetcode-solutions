@@ -72,8 +72,7 @@ public:
 };
 class Solution
 {
-    // helper not used in this implementation but kept for compatibility
-
+  
 public:
     vector<vector<int>> threeSum(vector<int> &nums)
     {
@@ -97,7 +96,7 @@ public:
                     while (l < r && nums[l] == nums[l - 1])
                         l++;
                     while (l < r && nums[r] == nums[r + 1])
-                        r++;
+                        r--;
                 }
                 else if (sum < 0)
                 {
