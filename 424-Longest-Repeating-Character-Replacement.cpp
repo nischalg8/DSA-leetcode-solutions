@@ -49,9 +49,45 @@ public:
     }
 };
 
+class Solution
+{
+
+public:
+    int characterReplacement(string s, int k)
+    {
+        int l = 0, r = 0, maxLen = 0, maxFreq = 0, freqArr[26] = {0};
+
+        while (r < s.length())
+        {
+            freqArr[s[r] - 'A']++;
+            maxFreq = max(maxFreq, freqArr[s[r] - 'A']);
+
+            while (((r - l + 1) - maxFreq) > k)
+            {
+                 /*  now that the changes to be made are greater than allowed changes k so we move left ptr
+                 window lenght = r-l+1 
+
+                 to make the entire window consist of one repeating character 
+
+                maxFreq is not decreased when moving left ptr, a stale maxFreq 
+                value still wont produce maxLen greater than it previously was 
+                this is enough for correctness and keeps the solution O(n).
+                */
+                freqArr[s[l] - 'A']--;             
+                l++;
+            }
+            
+            int changes = (r - l + 1) - maxFreq;
+            maxLen = changes <= k ? max(maxLen, r - l + 1) : maxLen;
+            r++;
+        }
+        return maxLen;
+    }
+};
+
 int main()
 {
-    BruteForceSolution bf;
+    Solution bf;
 
-    cout << bf.characterReplacement("AABABBA", 1) << endl;
+    cout << bf.characterReplacement("AAAABABBA", 2) << endl;
 }
