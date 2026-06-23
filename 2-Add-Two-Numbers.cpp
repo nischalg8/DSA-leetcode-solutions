@@ -24,8 +24,7 @@ public:
             int digitSum = l1->val + l2->val + carry;
             curr->val = digitSum % 10;
             carry = digitSum / 10;
-            cout << digitSum << endl;
-            cout << carry << " c" << endl;
+           
             if (l1->next || l2->next || carry)
             {
                 curr->next = new ListNode(0);
@@ -40,6 +39,7 @@ public:
             int digitSum = l1->val + carry;
             curr->val = digitSum % 10;
             carry = digitSum / 10;
+
             if (l1->next || carry)
             {
                 curr->next = new ListNode(0);
@@ -52,6 +52,7 @@ public:
             int digitSum = l2->val + carry;
             curr->val = digitSum % 10;
             carry = digitSum / 10;
+            
             if (l2->next || carry)
             {
                 curr->next = new ListNode(0);
